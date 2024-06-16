@@ -1,16 +1,22 @@
 
 import Foundation
 
+//게임시도 횟수
+var gameCount = 0
+var trialCount = 0
 
 class BaseballGame {
     func start() {
+        gameCount += 1
+        trialCount = 0
+        print("start gameCount: \(gameCount)")
         
         let answer = makeAnswer()
         print("answer: \(answer)")
         
         
+        
         while true {
-            
             //사용자로부터 숫자 입력 받기
             print("< ⚾️ 게임을 시작합니다. 숫자를 입력하세요. >")
             
@@ -24,6 +30,7 @@ class BaseballGame {
             //=> 올바르지 않은 입력값입니다. -> 반복문 처음으로 이동
             
             guard userInput.count == 3 , Set(userInput).count == 3 , let input = Int(userInput) , userInput.first != "0" else {
+                trialCount += 1
                 print("올바르지 않은 입력값입니다.")
                 continue
             }
@@ -43,27 +50,32 @@ class BaseballGame {
             
             ball -= strike
             
-            //            while true {   -> while문 없어도 가능
+            //while true {   -> while문 없어도 가능
             //같은 경우(스트라이크 3개) -> 정답입니다!
             //같은 자리에 같은 숫자 있는 경우 -> 스트라이크
             //다른 자리에 같은 숫자 있는 경우 -> 볼
             //전부다 틀린 경우 -> nothing
             if strike == 3 {
                 print("[정답입니다!🎉]")
+                trialCount += 1
                 break
             } else if strike == 0 && ball > 0 {
                 print("\(ball) 볼")
+                trialCount += 1
             } else if strike > 0 && ball == 0 {
                 print("\(strike) 스트라이크")
+                trialCount += 1
             } else if strike > 0 && ball > 0{
                 print("\(strike) 스트라이크 \(ball) 볼")
+                trialCount += 1
             }
             else {
                 print("[nothing...😢]")
+                trialCount += 1
             }
-            //            }
-            
+            //}
         }
+        
     }
     
     //정답 생성 함수 : 0에서부터 9까지 서로 다른 3자리 랜덤의 숫자
@@ -83,8 +95,17 @@ class BaseballGame {
         return answerNum
     }
     
+    
+    func viewRecord() {
+        print("<게임 기록 보기>")
+        print("\(gameCount)번째 게임 : 시도 횟수 - \(trialCount)")
+    }
+    
+    
     func endGame() {
+        gameCount = 0
         print("<숫자 야구 게임을 종료합니다.>")
+        print("===================================")
     }
 }
 
