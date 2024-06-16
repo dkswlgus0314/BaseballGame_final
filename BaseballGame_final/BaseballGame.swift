@@ -10,7 +10,7 @@ class BaseballGame {
         
         
         while true {
-               
+            
             //사용자로부터 숫자 입력 받기
             print("< ⚾️ 게임을 시작합니다. 숫자를 입력하세요. >")
             
@@ -81,6 +81,10 @@ class BaseballGame {
             }
         }
         return answerNum
+    }
+    
+    func endGame() {
+        print("<숫자 야구 게임을 종료합니다.>")
     }
 }
 
