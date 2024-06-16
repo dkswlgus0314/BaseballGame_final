@@ -10,29 +10,15 @@ import Foundation
 
 class BaseballGame {
     func start() {
+        print("< ⚾️ 게임을 시작합니다. 숫자를 입력하세요. >")
         
         let answer = makeAnswer()
         print("answer: \(answer)")
         
         
         while true {
-            print("환영합니다! 원하시는 번호를 입력해주세요.\n1. 게임 시작하기 2. 게임 기록 보기 3. 종료하기")
-            
-            var selectMenue = readLine()!
-            
-            guard let selectNum = Int(selectMenue) else { return  print("올바른 숫자를 입력해주세요.")
-                continue }
-            
-//            switch selectNum {
-//            case 1:
-//            case 2:
-//            case 3:
-//                default return 0
-//            }
-            
-            
             //사용자로부터 숫자 입력 받기
-            print("< ⚾️ 게임을 시작합니다. 숫자를 입력하세요. >")
+            
             
             var userInput = readLine()!  //string? 타입
             
