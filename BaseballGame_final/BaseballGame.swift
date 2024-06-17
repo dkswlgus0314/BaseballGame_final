@@ -4,12 +4,12 @@ import Foundation
 //게임시도 횟수
 var gameCount = 0
 var trialCount = 0
+var trialArray:[Int] = []
 
 class BaseballGame {
     func start() {
         gameCount += 1
         trialCount = 0
-        print("start gameCount: \(gameCount)")
         
         let answer = makeAnswer()
         print("answer: \(answer)")
@@ -50,30 +50,27 @@ class BaseballGame {
             
             ball -= strike
             
-            //while true {   -> while문 없어도 가능
-            //같은 경우(스트라이크 3개) -> 정답입니다!
-            //같은 자리에 같은 숫자 있는 경우 -> 스트라이크
-            //다른 자리에 같은 숫자 있는 경우 -> 볼
-            //전부다 틀린 경우 -> nothing
-            if strike == 3 {
+            
+            if strike == 3 {                          //같은 경우(스트라이크 3개) -> 정답입니다!
                 print("[정답입니다!🎉]")
                 trialCount += 1
+                endGame()
                 break
-            } else if strike == 0 && ball > 0 {
+            } else if strike == 0 && ball > 0 {       //다른 자리에 같은 숫자 있는 경우 -> 볼
                 print("\(ball) 볼")
                 trialCount += 1
-            } else if strike > 0 && ball == 0 {
+            } else if strike > 0 && ball == 0 {       //같은 자리에 같은 숫자 있는 경우 -> 스트라이크
+                
                 print("\(strike) 스트라이크")
                 trialCount += 1
             } else if strike > 0 && ball > 0{
                 print("\(strike) 스트라이크 \(ball) 볼")
                 trialCount += 1
             }
-            else {
+            else {                                     //전부다 틀린 경우 -> nothing
                 print("[nothing...😢]")
                 trialCount += 1
             }
-            //}
         }
         
     }
@@ -98,14 +95,17 @@ class BaseballGame {
     
     func viewRecord() {
         print("<게임 기록 보기>")
-        print("\(gameCount)번째 게임 : 시도 횟수 - \(trialCount)")
+        for (index, number ) in trialArray.enumerated() {
+            print("\(index + 1)번째 게임 : 시도 횟수 - \(number)")
+        }
     }
     
     
     func endGame() {
         gameCount = 0
+        trialArray.append(trialCount)
+        print(trialArray)
         print("<숫자 야구 게임을 종료합니다.>")
-        print("===================================")
     }
 }
 
